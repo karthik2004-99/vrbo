@@ -43,7 +43,7 @@ public class VrboController {
 
         log.info("Getting the Listing Data from VRBO....");
         ArrayList<ListingData> listings= preLoadingData(location,radius);
-
+        log.info("Data Received from VRBO....");
         httpResponse.setHeader("Content-Disposition", "attachment;filename=closest50.csv");
         httpResponse.setHeader("Content-Type", "text/csv");
         OutputStream outStream = httpResponse.getOutputStream();
@@ -58,7 +58,9 @@ public class VrboController {
     }
     @GetMapping(path="/vrbo/getTop3PriceDate")
     void getHighestPriceandDate(@RequestParam("location") String location, @RequestParam("radius") String radius, HttpServletResponse httpResponse) throws ParseException, IOException, RadiusLowException {
+        log.info("Getting 3 Highest Price and Data from VRBO.....");
         ArrayList<ListingData> listings= preLoadingData(location,radius);
+        log.info("Received Data from VRBO.....");
         httpResponse.setHeader("Content-Disposition", "attachment;filename=listing-with3highest.csv");
         httpResponse.setHeader("Content-Type", "text/csv");
         OutputStream outStream = httpResponse.getOutputStream();
